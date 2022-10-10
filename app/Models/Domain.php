@@ -13,6 +13,9 @@ class Domain extends Model
         'uuid', 'names_servers', 'name'
     ];
 
+    protected $hidden = [
+        'id', 'created_at', 'updated_at'
+    ];
     protected $cast = [
         'uuid'           => 'string',
         'name'           => 'string',
