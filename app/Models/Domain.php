@@ -10,10 +10,12 @@ class Domain extends Model
     use HasFactory;
 
     protected $fillable = [
-        'id', 'name_servers'
+        'uuid', 'names_servers', 'name'
     ];
 
     protected $cast = [
-        'id' => 'string'
+        'uuid'           => 'string',
+        'name'           => 'string',
+        'names_servers'  => 'array'   
     ];
 }

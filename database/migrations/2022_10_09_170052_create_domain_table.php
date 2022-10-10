@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('domains', function (Blueprint $table) {
             $table->uuid()->primary();
             $table->string('name')->unique();
-            $table->json('name_servers');
+            $table->json('names_servers');
             $table->timestamps();
         });
     }
