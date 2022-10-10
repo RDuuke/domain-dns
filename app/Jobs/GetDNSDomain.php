@@ -2,6 +2,7 @@
 
 namespace App\Jobs;
 
+use App\Helpers\GetDnsRecords;
 use Spatie\Dns\Dns;
 use App\Models\Domain;
 use Illuminate\Bus\Queueable;
@@ -34,13 +35,7 @@ class GetDNSDomain implements ShouldQueue
      */
     public function handle()
     {
-        $records = (new Dns)->getRecords($this->domain->name, 'NS');  
-
-        foreach($records as $record) {
-            array_push($this->dns, $record->target());
-        }
-
-        $this->domain->names_servers = json_encode($this->dns);
+        $this->domain->names_servers = json_encode((new GetDnsRecords)->getRecordsNS($this->domain->name));
         $this->domain->save();
     }
 }
