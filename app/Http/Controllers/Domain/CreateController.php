@@ -5,8 +5,8 @@ namespace App\Http\Controllers\Domain;
 use Exception;
 use App\Models\Domain;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Validator;
 use App\Http\Requests\Domain\StoreDomainRequest;
+use App\Jobs\GetDNSDomain;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
 class CreateController extends Controller
@@ -16,11 +16,12 @@ class CreateController extends Controller
         
         try {
 
-            Domain::create([
+            $domain = Domain::create([
                 'uuid' => $request->get('uuid'),
                 'name' => $request->get('name'),
-                'names_servers' => json_encode($request->get('names_servers')),
             ]);
+
+            GetDNSDomain::dispatch($domain);
             return response()->json([
                 'success'   => false,
                 'message'   => 'Success creation',

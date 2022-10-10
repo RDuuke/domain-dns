@@ -14,9 +14,10 @@ return new class extends Migration
     public function up()
     {
         Schema::create('domains', function (Blueprint $table) {
-            $table->uuid()->primary();
+            $table->id();
+            $table->string('uuid')->unique();
             $table->string('name')->unique();
-            $table->json('names_servers');
+            $table->json('names_servers')->default(null);
             $table->timestamps();
         });
     }

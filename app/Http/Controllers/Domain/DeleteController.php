@@ -10,10 +10,10 @@ use Illuminate\Http\Exceptions\HttpResponseException;
 
 class DeleteController extends Controller
 {
-    public function __invoke(string $id)
+    public function __invoke(string $uuid)
     {
         try {
-            $domain = Domain::findOrFail($id);
+            $domain = Domain::where('uuid', $uuid)->first();
             if ($domain->delete()) {
                 return response()->json([
                     'success'   => true,

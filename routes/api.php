@@ -1,10 +1,9 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Domain\AllController;
 use App\Http\Controllers\Domain\CreateController;
 use App\Http\Controllers\Domain\DeleteController;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,5 +19,5 @@ use Illuminate\Support\Facades\Route;
 Route::prefix('/domain')->group(function() {
     Route::get('/', AllController::class);
     Route::post('/', CreateController::class);
-    Route::delete('/{id}/delete', DeleteController::class);
+    Route::delete('/{uuid}/delete', DeleteController::class);
 });

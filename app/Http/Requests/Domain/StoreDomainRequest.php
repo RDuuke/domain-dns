@@ -40,8 +40,7 @@ class StoreDomainRequest extends FormRequest
     {
         return [
             'uuid' => 'required|uuid|unique:domains,uuid',
-            'name' => 'required|unique:domains,name',
-            'names_servers.*' => 'required'
+            'name' => 'required|active_url|unique:domains,name',
         ];
     }
 }
